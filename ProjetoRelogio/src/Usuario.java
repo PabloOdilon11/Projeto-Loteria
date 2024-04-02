@@ -1,35 +1,49 @@
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.UUID;
 
 class Usuario {
+    private String id;
+    private String nomeUsuario;
     private double saldo;
-    private List<Integer> numerosApostados;
 
-    public Usuario(double saldoInicial) {
-        saldo = saldoInicial;
-        numerosApostados = new ArrayList<>();
+    public Usuario(String nomeUsuario, double saldoInicial) {
+        this.nomeUsuario = nomeUsuario;
+        this.saldo = saldoInicial;
+        gerarID();
     }
 
-    // Método para depositar dinheiro na conta do usuário
-    public void depositar(double valor) {
-        saldo += valor;
-        System.out.println("Depósito de R$" + valor + " realizado com sucesso.");
+    public String getNomeUsuario() {
+        return nomeUsuario;
     }
 
-    // Método para realizar uma aposta
-    public void fazerAposta(int numero) {
-        numerosApostados.add(numero);
-        System.out.println("Aposta no número " + numero + " realizada com sucesso.");
-    }
-
-    public List<Integer> getNumerosApostados() {
-        return numerosApostados;
+    public String getId() {
+        return id;
     }
 
     public double getSaldo() {
         return saldo;
     }
 
-    // Outros métodos, se necessário...
+    void gerarID() {
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public void depositar(double valor) {
+        saldo += valor;
+        System.out.println("Depósito de R$" + valor + " realizado com sucesso para o usuário " + nomeUsuario + ".");
+    }
+
+    public void ganharAposta(double valorGanho) {
+        saldo += valorGanho;
+        System.out.println("Parabéns! Você ganhou R$" + valorGanho + " na aposta.");
+    }
+
+    public void perderAposta(double valorPerdido) {
+        saldo -= valorPerdido;
+        System.out.println("Infelizmente você perdeu R$" + valorPerdido + " na aposta.");
+    }
+
+    public int[] getNumerosApostados() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getNumerosApostados'");
+    }
 }
